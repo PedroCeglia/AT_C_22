@@ -1,0 +1,17 @@
+﻿@page
+@model AT_C__2.Pages.TestePacoteTuristicoModel
+@{
+    ViewData["Title"] = "Teste Pacote Turistico";
+}
+
+<h1>Teste Pacote Turistico</h1>
+<p>(Capacidade Máxima = 2, 3 reservas).</p>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Testar</button>
+</form>
+
+@if (Model.Resultado != null)
+{
+    <p>@Model.Resultado</p>
+}

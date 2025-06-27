@@ -1,0 +1,58 @@
+﻿@page
+@model AT_C__2.Pages.ViewNotesModel
+@using System.Text.Encodings.Web
+@{
+    ViewData["Title"] = "Gerenciar Notas";
+}
+
+<h1>Gerenciar Notas</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="NoteName">Nome da Nota</label>
+                <input asp-for="NoteName" class="form-control" placeholder="Ex.: nota1" />
+                <span asp-validation-for="NoteName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="NoteContent">Conteúdo da Nota</label>
+                <textarea asp-for="NoteContent" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="NoteContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar Nota" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<h3>Notas Disponíveis</h3>
+@if (Model.FileNames != null && Model.FileNames.Any())
+{
+    <ul>
+        @foreach (var fileName in Model.FileNames)
+        {
+            <li>
+                <a asp-page="./ViewNotes" asp-route-fileName="@fileName">@fileName</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Nenhuma nota encontrada.</p>
+}
+
+@if (!string.IsNullOrEmpty(Model.SelectedNoteContent))
+{
+    <h3>Conteúdo da Nota</h3>
+    <pre>@HtmlEncoder.Default.Encode(Model.SelectedNoteContent)</pre>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
